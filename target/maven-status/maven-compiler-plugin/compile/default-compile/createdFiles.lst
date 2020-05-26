@@ -1,0 +1,7 @@
+ar/com/ada/creditos/excepciones/ClienteDNIException.class
+ar/com/ada/creditos/excepciones/ClienteInfoException.class
+ar/com/ada/creditos/entities/Cliente.class
+ar/com/ada/creditos/managers/ClienteManager.class
+ar/com/ada/creditos/App.class
+ar/com/ada/creditos/excepciones/ClienteEdadException.class
+ar/com/ada/creditos/ABM.class

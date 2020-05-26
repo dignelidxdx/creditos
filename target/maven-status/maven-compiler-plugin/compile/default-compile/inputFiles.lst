@@ -1,0 +1,7 @@
+/home/digneli/Documentos/ADA_Backend/creditos/src/main/java/ar/com/ada/creditos/entities/Cliente.java
+/home/digneli/Documentos/ADA_Backend/creditos/src/main/java/ar/com/ada/creditos/excepciones/ClienteDNIException.java
+/home/digneli/Documentos/ADA_Backend/creditos/src/main/java/ar/com/ada/creditos/managers/ClienteManager.java
+/home/digneli/Documentos/ADA_Backend/creditos/src/main/java/ar/com/ada/creditos/App.java
+/home/digneli/Documentos/ADA_Backend/creditos/src/main/java/ar/com/ada/creditos/excepciones/ClienteEdadException.java
+/home/digneli/Documentos/ADA_Backend/creditos/src/main/java/ar/com/ada/creditos/ABM.java
+/home/digneli/Documentos/ADA_Backend/creditos/src/main/java/ar/com/ada/creditos/excepciones/ClienteInfoException.java

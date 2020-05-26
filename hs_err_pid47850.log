@@ -1,0 +1,33 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f2e78fb0c44, pid=47850, tid=47860
+#
+# JRE version: OpenJDK Runtime Environment (11.0.7+10) (build 11.0.7+10-post-Ubuntu-3ubuntu1)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.7+10-post-Ubuntu-3ubuntu1, mixed mode, sharing, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x3c44]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P %E" (or dumping to /home/digneli/Documentos/ADA_Backend/creditos/core.47850)
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-lts
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=localhost:44219 -Dfile.encoding=UTF-8 ar.com.ada.creditos.App
+
+Host: Intel(R) Pentium(R) CPU B960 @ 2.20GHz, 2 cores, 3G, Ubuntu 20.04 LTS
+Time: Fri May 22 01:30:42 2020 -03 elapsed time: 9820 seconds (0d 2h 43m 40s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f2e740c5800):  JavaThread "Signal Dispatcher" daemon [_thread_in_vm, id=47860, stack(0x00007f2e5c283000,0x00007f2e5c384000)]
+
+Stack: [0x00007f2e5c283000,0x00007f2e5c384000],  sp=0x00007f2e5c3811f0,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.so+0x3c44]
+C  [libjimage.so+0x3dfa]
+C  [libjimage.so+0x42b1]  JIMAGE_FindResource+0xf1
+V  [libjvm.so+0x57f3f0]
