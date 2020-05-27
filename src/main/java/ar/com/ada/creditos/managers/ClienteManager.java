@@ -63,9 +63,11 @@ public class ClienteManager {
     }
 
     public Cliente readByDNI(String dni) {
+
+        int nuevoDNI = Integer.parseInt(dni);
         Session session = sessionFactory.openSession();
 
-        Cliente cliente = session.get(Cliente.class, dni);
+        Cliente cliente = session.byNaturalId(Cliente.class).using("dni", nuevoDNI).load();
 
         session.close();
 

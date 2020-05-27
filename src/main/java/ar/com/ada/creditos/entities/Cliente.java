@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NaturalId;
+
 import ar.com.ada.creditos.excepciones.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int clienteId;
     private String nombre;
+    @NaturalId 
     private int dni;
     private String domicilio;
     @Column(name = "domicilio_alternativo")
