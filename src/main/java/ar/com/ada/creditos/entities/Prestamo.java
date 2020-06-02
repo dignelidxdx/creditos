@@ -75,4 +75,11 @@ public class Prestamo {
         this.cliente = cliente;
         this.cliente.getPrestamos().add(this);
     }
+
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "[prestamo= " + this.prestamoId + "]";
+    }
 }
