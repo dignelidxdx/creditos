@@ -9,6 +9,7 @@ import java.util.Scanner;
 import org.hibernate.exception.ConstraintViolationException;
 
 import ar.com.ada.creditos.entities.*;
+import ar.com.ada.creditos.entities.reportes.ReportePrestamoPorCliente;
 import ar.com.ada.creditos.excepciones.*;
 import ar.com.ada.creditos.managers.*;
 
@@ -87,7 +88,7 @@ public class ABM {
                             break;
 
                         case 5:
-                            // listarPorNombreDePrestamo();
+                            reportePrestamoPorCliente();
                             break;
 
                         default:
@@ -314,6 +315,26 @@ public class ABM {
         }
     }
 
+    public void reportePrestamoPorCliente() {
+
+        System.out.println("Ingrese el ID del cliente:");
+        int id = Teclado.nextInt();
+        Teclado.nextLine();
+
+        List<ReportePrestamoPorCliente> clientes = ABMPrestamo.generarReportePrestamoCliente(id);
+        for (ReportePrestamoPorCliente cliente : clientes) {
+            mostrarReportePrestamoPorCliente(cliente);
+        }
+    }
+
+    public void mostrarReportePrestamoPorCliente(ReportePrestamoPorCliente reporte) {
+
+        System.out.print("Cantidad de prestamos realizado por: " +
+         reporte.getCliente().getNombre() + "con una cantidad de: " + reporte.getCantidadPrestamos() +
+          " Importe Maximo: " + reporte.getImporteMaximo() +
+          " Total de Prestamo" + reporte.getTotalPrestamo());
+    }
+
     public void mostrarCliente(Cliente cliente) {
 
         System.out.print("Id: " + cliente.getClienteId() + " Nombre: " + cliente.getNombre() + " DNI: "
@@ -342,6 +363,7 @@ public class ABM {
         System.out.println("");
         System.out.println("1. Menu Cliente.");
         System.out.println("2. Menu Prestamo.");
+        System.out.println("2. Menu Cancelación.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
@@ -393,7 +415,7 @@ public class ABM {
         System.out.println("2. Para eliminar un prestamo.");
         System.out.println("3. Para modificar un prestamo.");
         System.out.println("4. Para ver el listado.");
-        System.out.println("5. Buscar un prestamo por nombre especifico(SQL Injection)).");
+        System.out.println("5. Generar reporte de prestamos por ID clientes.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
