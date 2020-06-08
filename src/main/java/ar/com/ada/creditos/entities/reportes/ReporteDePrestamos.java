@@ -1,4 +1,6 @@
 package ar.com.ada.creditos.entities.reportes;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -6,22 +8,32 @@ import javax.persistence.Id;
 public class ReporteDePrestamos {
     
     @Id
-    private int cantidad;
-    private int total;
+    @Column(name="prestamo_id")
+    private int prestamoId;
+    private int cantidadDePrestamos;
+    private int totalDeCash;
 
-    public int getCantidad() {
-        return cantidad;
+    public int getPrestamoId() {
+        return prestamoId;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setPrestamoId(int prestamoId) {
+        this.prestamoId = prestamoId;
     }
 
-    public int getTotal() {
-        return total;
+    public int getCantidadDePrestamos() {
+        return cantidadDePrestamos;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setCantidadDePrestamos(int cantidadDePrestamos) {
+        this.cantidadDePrestamos = cantidadDePrestamos;
+    }
+
+    public int getTotalDeCash() {
+        return totalDeCash;
+    }
+
+    public void setTotalDeCash(int totalDeCash) {
+        this.totalDeCash = totalDeCash;
     }
 }

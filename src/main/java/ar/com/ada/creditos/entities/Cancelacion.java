@@ -16,6 +16,7 @@ public class Cancelacion {
     private Date fechaCancelacion;
     private int importe;
     private int cuota;
+    private int cancelacion;
 
     @ManyToOne
     @JoinColumn(name = "prestamo_id", referencedColumnName = "prestamo_id")
@@ -59,5 +60,13 @@ public class Cancelacion {
 
     public void setPrestamo(Prestamo prestamo) {
         this.prestamo = prestamo;
+    }
+
+    public int getCancelacion() {
+        return cancelacion;
+    }
+
+    public void setCancelacion(int cancelacion) {
+        this.cancelacion = cancelacion;
     }
 }

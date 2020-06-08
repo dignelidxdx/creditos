@@ -1,7 +1,12 @@
 package ar.com.ada.creditos.entities;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
+import ar.com.ada.creditos.entities.*;
 
 // @Entity  Indica que esa clase actuara como entidad
 // @Table Indica a que tabla va a persistirse ese objeto.
@@ -25,6 +30,9 @@ public class Prestamo {
     @ManyToOne
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     private Cliente cliente;
+
+    // @OneToMany(mappedBy = "prestamo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // private List<Cancelacion> cancelaciones = new ArrayList<>();
 
     public int getPrestamoId() {
         return prestamoId;
@@ -82,4 +90,12 @@ public class Prestamo {
         // TODO Auto-generated method stub
         return "[prestamo= " + this.prestamoId + "]";
     }
+
+    // public List<Cancelacion> getCancelaciones() {
+    //     return cancelaciones;
+    // }
+
+    // public void setCancelaciones(List<Cancelacion> cancelaciones) {
+    //     this.cancelaciones = cancelaciones;
+    // }
 }

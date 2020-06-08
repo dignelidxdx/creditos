@@ -1,20 +1,20 @@
 package ar.com.ada.creditos.entities.reportes;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import ar.com.ada.creditos.entities.Cliente;
-import ar.com.ada.creditos.entities.Prestamo;
+import javax.persistence.Table;
 
 @Entity
 public class ReportePrestamoPorCliente {
     
     @Id
+    @Column(name = "idcliente")
+    private int clienteId;
     private int cantidadPrestamos;
     private int importeMaximo;
     private int totalPrestamo;
-    private Cliente cliente;
-    private Prestamo prestamo;
+    private String nombre;
 
     public int getCantidadPrestamos() {
         return cantidadPrestamos;
@@ -40,19 +40,19 @@ public class ReportePrestamoPorCliente {
         this.totalPrestamo = totalPrestamo;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getClienteId() {
+        return clienteId;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
     }
 
-    public Prestamo getPrestamo() {
-        return prestamo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPrestamo(Prestamo prestamo) {
-        this.prestamo = prestamo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
