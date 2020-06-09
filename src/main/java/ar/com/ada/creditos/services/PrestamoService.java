@@ -6,13 +6,13 @@ import ar.com.ada.creditos.entities.reportes.ReporteDePrestamos;
 import ar.com.ada.creditos.entities.reportes.ReportePrestamoPorCliente;
 import ar.com.ada.creditos.managers.PrestamoManager;
 
-public class PrestamoService extends PrestamoManager {
+public class PrestamoService {
 
     public PrestamoManager repo = new PrestamoManager();
 
     public PrestamoService(PrestamoManager repo) {
         this.repo = repo;
-        super.setup();
+        repo.setup();
     }
 
 	public void reportePrestamoPorCliente(int id) {

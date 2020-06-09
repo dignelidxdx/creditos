@@ -31,8 +31,8 @@ public class Prestamo {
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     private Cliente cliente;
 
-    // @OneToMany(mappedBy = "prestamo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // private List<Cancelacion> cancelaciones = new ArrayList<>();
+    @OneToMany(mappedBy = "prestamo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Cancelacion> cancelaciones = new ArrayList<>();
 
     public int getPrestamoId() {
         return prestamoId;
@@ -91,11 +91,11 @@ public class Prestamo {
         return "[prestamo= " + this.prestamoId + "]";
     }
 
-    // public List<Cancelacion> getCancelaciones() {
-    //     return cancelaciones;
-    // }
+    public List<Cancelacion> getCancelaciones() {
+        return cancelaciones;
+    }
 
-    // public void setCancelaciones(List<Cancelacion> cancelaciones) {
-    //     this.cancelaciones = cancelaciones;
-    // }
+    public void setCancelaciones(List<Cancelacion> cancelaciones) {
+        this.cancelaciones = cancelaciones;
+    }
 }

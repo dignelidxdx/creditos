@@ -83,6 +83,20 @@ public class CancelacionManager {
         session.close();
     }
 
+    public List<Cancelacion> buscarTodos() {
+
+        Session session = sessionFactory.openSession();
+
+        /// NUNCA HARCODEAR SQLs nativos en la aplicacion.
+        // ESTO es solo para nivel educativo
+        Query query = session.createNativeQuery("SELECT * FROM cancelacion", Cancelacion.class);
+
+        List<Cancelacion> todos = query.getResultList();
+
+        return todos;
+
+    }
+
     public Cancelacion buscarPorIdDCancelacion(int idDeCancelacion) {
         Session session = sessionFactory.openSession();
 

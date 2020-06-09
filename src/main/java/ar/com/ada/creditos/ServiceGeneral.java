@@ -16,17 +16,17 @@ import ar.com.ada.creditos.services.CancelacionService;
 import ar.com.ada.creditos.services.ClienteService;
 import ar.com.ada.creditos.services.PrestamoService;
 
-public class ABM {
+public class ServiceGeneral {
 
     public static Scanner Teclado = new Scanner(System.in);
 
-    protected ClienteManager ABMCliente = new ClienteManager();
+    protected static ClienteManager ABMCliente = new ClienteManager();
     protected PrestamoManager ABMPrestamo = new PrestamoManager();
     protected CancelacionManager ABMCcancelacion = new CancelacionManager();
 
-    protected ClienteService ServiceCliente = new ClienteService();
+    protected ClienteService ServiceCliente = new ClienteService(ABMCliente);
     protected PrestamoService ServicePrestamo = new PrestamoService(ABMPrestamo);
-    protected CancelacionService ServiceCancelacion = new CancelacionService();
+    protected CancelacionService ServiceCancelacion = new CancelacionService(ABMCcancelacion, ABMPrestamo);
 
     public void iniciar() throws Exception {
 
@@ -67,11 +67,14 @@ public class ABM {
                             break;
 
                         case 5:
-                            listarPorNombreDeCliente();
+                            System.out.println("Ingrese el nombre:");
+                            String nombre = Teclado.nextLine();
+                            ServiceCliente.listarPorNombreDeCliente(nombre);
                             break;
 
                         default:
                             System.out.println("La opcion no es correcta.");
+
                             break;
                     }
 
@@ -131,11 +134,12 @@ public class ABM {
                             break;
 
                         case 4:
-                            // listarPrestamo();
+                            ((CancelacionService) ServiceCancelacion).listarCancelacion();
                             break;
 
                         case 5:
-                            // reportePrestamoPorCliente();
+                            System.out.println("Indicar id de cancelacion: ");                            
+                            ServiceCancelacion.eliminarUnaCancelacion(Teclado.nextInt());
                             break;
 
                         default:
@@ -207,15 +211,6 @@ public class ABM {
 
         System.out.println("Introduzca la fecha con formato dd/mm/yyyy");
         prestamo.setFecha(new Date());
-
-        // SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        // Date testDate = null;
-        // String date = fecha;
-        // try{
-        // testDate = df.parse(date);
-        // System.out.println("Ahora hemos creado un objeto date con la fecha indicada,
-        // "+testDate);
-        // } catch (Exception e){ System.out.println("invalid format");}
 
         System.out.println("Generando fecha alta:");
         prestamo.setFechaAlta(new Date());
@@ -362,26 +357,6 @@ public class ABM {
         }
     }
 
-    public void reportePrestamoPorCliente() {
-
-        System.out.println("Ingrese el ID del cliente:");
-        int id = Teclado.nextInt();
-        Teclado.nextLine();
-
-        List<ReportePrestamoPorCliente> clientes = ABMPrestamo.generarReportePrestamoCliente(id);
-        for (ReportePrestamoPorCliente cliente : clientes) {
-            mostrarReportePrestamoPorCliente(cliente);
-        }
-    }
-
-    public void mostrarReportePrestamoPorCliente(ReportePrestamoPorCliente reporte) {
-
-        System.out.print("Cantidad de prestamos realizado por: " +
-         reporte.getNombre() + " con Id de: " + reporte.getClienteId() + "con una cantidad de: " + reporte.getCantidadPrestamos() +
-          " Importe Maximo: " + reporte.getImporteMaximo() +
-          " Total de Prestamo" + reporte.getTotalPrestamo());
-    }
-
     public void mostrarCliente(Cliente cliente) {
 
         System.out.print("Id: " + cliente.getClienteId() + " Nombre: " + cliente.getNombre() + " DNI: "
@@ -432,6 +407,9 @@ public class ABM {
             case 3:
                 resultado = printOpcionesCancelacion();
                 break;
+            case 0:
+                ABMCliente.exit();
+                break;
 
             default:
                 System.out.println("La opcion no es correcta.");
@@ -481,7 +459,8 @@ public class ABM {
         System.out.println("1. Para agregar un pago de un prestamo.");
         System.out.println("2. Para eliminar un pago de un prestamo.");
         System.out.println("3. Para modificar una cancelacion.");
-        System.out.println("4. Para ver reporte de las cancelacions por IDcliente.");
+        System.out.println("4. Para ver reporte de las cancelacions por ID del Prestamo.");
+        System.out.println("5. Para eliminar cancelaciones ya completadas.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");

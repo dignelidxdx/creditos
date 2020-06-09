@@ -1,14 +1,18 @@
 package ar.com.ada.creditos.services;
 
 import java.util.List;
+
 import ar.com.ada.creditos.entities.Cliente;
 import ar.com.ada.creditos.managers.ClienteManager;
 
 public class ClienteService {
-    
-    ClienteManager repo;
 
-    protected ClienteManager ABMCliente = new ClienteManager();
+    public ClienteManager repo = new ClienteManager();
+ 
+    public ClienteService(ClienteManager repo) {
+        this.repo = repo;
+        repo.setup();
+    }    
 
     public List<Cliente> getClientes(String nombre) {
         return repo.buscarPor(nombre);
@@ -16,9 +20,17 @@ public class ClienteService {
 
     public void listarCliente() {
 
-        List<Cliente> todos = ABMCliente.buscarTodos();
+        List<Cliente> todos = repo.buscarTodos();
         for (Cliente c : todos) {
             mostrarCliente(c);
+        }
+    }
+
+    public void listarPorNombreDeCliente(String nombre) {
+
+        List<Cliente> clientes = repo.buscarPor(nombre);
+        for (Cliente cliente : clientes) {
+            mostrarCliente(cliente);
         }
     }
 
@@ -32,4 +44,6 @@ public class ClienteService {
         else
             System.out.println();
     }
+
+
 }
