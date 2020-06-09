@@ -2,8 +2,6 @@ package ar.com.ada.creditos.services;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-
 import ar.com.ada.creditos.entities.reportes.ReporteDePrestamos;
 import ar.com.ada.creditos.entities.reportes.ReportePrestamoPorCliente;
 import ar.com.ada.creditos.managers.PrestamoManager;

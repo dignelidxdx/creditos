@@ -3,6 +3,8 @@ package ar.com.ada.creditos.managers;
 import java.util.List;
 import java.util.logging.Level;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -80,4 +82,31 @@ public class CancelacionManager {
         session.getTransaction().commit();
         session.close();
     }
+
+    public Cancelacion buscarPorIdDCancelacion(int idDeCancelacion) {
+        Session session = sessionFactory.openSession();
+
+        Query query = session.createNativeQuery("SELECT * FROM cancelacion where cancelacion_id = ?", Cancelacion.class);
+        query.setParameter(1, idDeCancelacion);
+        Cancelacion cancelacionId = (Cancelacion) query.getSingleResult();
+        return cancelacionId;
+    }
+
+    public Boolean eliminacionLogica(int idDeCancelacion) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createNativeQuery("UPDATE cancelacion SET eliminado = 1 WHERE cancelacion_id = ?", Cancelacion.class);
+        query.setParameter(1, idDeCancelacion);
+        session.beginTransaction();
+
+        int cambio = query.executeUpdate();
+        if(cambio == 1) {
+            session.getTransaction().commit();
+            session.close();
+            return true;
+        } else {
+            session.close();
+            return false;
+        }
+    }
+
 }
