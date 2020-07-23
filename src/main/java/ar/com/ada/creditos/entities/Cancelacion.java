@@ -16,6 +16,8 @@ public class Cancelacion {
     private Date fechaCancelacion;
     private int importe;
     private int cuota;
+    @Column(name="estado_id")
+    private int estadoId;
 
     @ManyToOne
     @JoinColumn(name = "prestamo_id", referencedColumnName = "prestamo_id")
@@ -59,6 +61,40 @@ public class Cancelacion {
 
     public void setPrestamo(Prestamo prestamo) {
         this.prestamo = prestamo;
+    }
+
+    public EstadoCancelacionEnum getEstadoId() {
+        return EstadoCancelacionEnum.parse(this.estadoId);
+    }
+
+    public void setEstadoId(EstadoCancelacionEnum estadoId) {
+        this.estadoId = estadoId.getValue();
+    }
+
+    public enum EstadoCancelacionEnum {
+        ACTIVA(1), PARCIALMENTE_CONFIRMADO(2), ANULADA(99);
+
+        private final int value; // NOTE: Enum constructor tiene que estar en privado
+
+        private EstadoCancelacionEnum(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static EstadoCancelacionEnum parse(int id) {
+            EstadoCancelacionEnum status = null;
+            // Default
+            for (EstadoCancelacionEnum item : EstadoCancelacionEnum.values()) {
+                if (item.getValue() == id) {
+                    status = item;
+                    break;
+                }
+            }
+            return status;
+        }
     }
 
 }

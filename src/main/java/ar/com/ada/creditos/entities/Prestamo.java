@@ -13,19 +13,21 @@ import ar.com.ada.creditos.entities.*;
 // "@" son anotaciones
 
 @Entity
-@Table(name="prestamo")
+@Table(name = "prestamo")
 public class Prestamo {
 
     @Id // que es una PK.
-    @Column(name="prestamo_id")
+    @Column(name = "prestamo_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Autoincremental
-    private int prestamoId;    
+    private int prestamoId;
     private BigDecimal importe;
     private Date fecha;
-    @Column(name="cuota")
+    @Column(name = "cuota")
     private int cuotas;
-    @Column(name="fecha_alta")
+    @Column(name = "fecha_alta")
     private Date fechaAlta;
+    @Column(name = "estado_id")
+    private int estadoId;
 
     @ManyToOne
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
@@ -74,7 +76,6 @@ public class Prestamo {
         this.fechaAlta = fechaAlta;
     }
 
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -83,7 +84,6 @@ public class Prestamo {
         this.cliente = cliente;
         this.cliente.getPrestamos().add(this);
     }
-
 
     @Override
     public String toString() {
@@ -98,4 +98,44 @@ public class Prestamo {
     public void setCancelaciones(List<Cancelacion> cancelaciones) {
         this.cancelaciones = cancelaciones;
     }
+
+    public EstadoPrestamoEnum getEstadoId() {
+        return EstadoPrestamoEnum.parse(this.estadoId);
+    }
+
+    public void setEstadoId(EstadoPrestamoEnum estadoId) {
+        this.estadoId = estadoId.getValue();
+    }
+
+    public enum EstadoPrestamoEnum {
+        SOLICITADO(1), 
+        RECHAZADO(2),
+        PENDIENTE_APROBACION(3),
+        APROBADO(4),
+        PREAPROBADO(100);
+
+        private final int value; // NOTE: Enum constructor tiene que estar en privado
+
+        private EstadoPrestamoEnum(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static EstadoPrestamoEnum parse(int id) {
+            EstadoPrestamoEnum status = null;
+            // Default
+            for (EstadoPrestamoEnum item : EstadoPrestamoEnum.values()) {
+                if (item.getValue() == id) {
+                    status = item;
+                    break;
+                }
+            }
+            return status;
+        }
+    }
+
+
 }

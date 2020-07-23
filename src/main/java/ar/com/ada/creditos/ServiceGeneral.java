@@ -1,6 +1,8 @@
 package ar.com.ada.creditos;
 
+import java.lang.invoke.VarHandle.AccessMode;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Scanner;
 import org.hibernate.exception.ConstraintViolationException;
 
 import ar.com.ada.creditos.entities.*;
+import ar.com.ada.creditos.entities.Prestamo.EstadoPrestamoEnum;
 import ar.com.ada.creditos.entities.reportes.ReportePrestamoPorCliente;
 import ar.com.ada.creditos.excepciones.*;
 import ar.com.ada.creditos.managers.*;
@@ -210,7 +213,15 @@ public class ServiceGeneral {
         prestamo.setImporte(Teclado.nextBigDecimal());
 
         System.out.println("Introduzca la fecha con formato dd/mm/yyyy");
-        prestamo.setFecha(new Date());
+        // prestamo.setFecha(new Date()); Forma 2 fecha actual de la maquina
+        Date date = null;
+        DateFormat df = new SimpleDateFormat("dd/mm/yy");
+        try {
+            date = df.parse(Teclado.nextLine());
+            prestamo.setFecha(date);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
 
         System.out.println("Generando fecha alta:");
         prestamo.setFechaAlta(new Date());
@@ -223,6 +234,8 @@ public class ServiceGeneral {
         Cliente clienteID = ABMCliente.readByDNI(Teclado.nextLine());
 
         prestamo.setCliente(clienteID);
+
+        prestamo.setEstadoId(EstadoPrestamoEnum.APROBADO);
 
         ABMPrestamo.create(prestamo);
 

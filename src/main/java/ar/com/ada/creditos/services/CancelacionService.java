@@ -32,6 +32,7 @@ public class CancelacionService {
 
     public void agregarCancelacion() {
         Cancelacion cancelacion = new Cancelacion();
+
         System.out.println("Ingrese importe:");
         cancelacion.setImporte(Teclado.nextInt());
 
@@ -41,8 +42,14 @@ public class CancelacionService {
         System.out.println("Introduzca # de cuota cancelada:");
         cancelacion.setCuota(Teclado.nextInt());
 
-        System.out.println("Vinculacion del prestamo, introduzca DNI del prestamo:");
+        System.out.println("Vinculacion del prestamo, introduzca ID del prestamo:");
         Prestamo prestamoID = repoPrestamo.buscarPorIdPrestamo(Teclado.nextInt());
+
+        while(prestamoID == null){
+            System.out.println("No existe un prestamo con ese número de ID.");
+            System.out.println("Introduzca ID del prestamo:");
+            prestamoID = repoPrestamo.buscarPorIdPrestamo(Teclado.nextInt());
+        }
 
         cancelacion.setPrestamo(prestamoID);
 
@@ -76,9 +83,7 @@ public class CancelacionService {
         } else{
             System.out.println("Ocurrio un error al actualizarlo");
         }
-    }
-
-    
+    }  
 
 
     
